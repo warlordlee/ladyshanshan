@@ -37,7 +37,7 @@
             </div>
         </div>
         <div class="music">
-            <audio loop="loop" autoplay="autoplay">
+            <audio loop="loop" autoplay="autoplay" id="bg-music">
                 <source src="../assets/music/girl.mp3" type="audio/mpeg">
             </audio>
         </div>
@@ -46,6 +46,7 @@
 
 <script>
     import commonContainer from '../components/commonContainer'
+
     export default {
         name: "home",
         components: {
@@ -56,16 +57,30 @@
                 index: 0,
             }
         },
+        mounted() {
+            this.audioAutoPlay();
+        },
         methods: {
             handleClick() {
                 this.$refs.year.next()
+            },
+            audioAutoPlay() {
+                let audio = document.getElementById("bg-music");
+                audio.play();
+                document.addEventListener(
+                    "WeixinJSBridgeReady",
+                    function () {
+                        audio.play();
+                    },
+                    false
+                );
             }
         }
     }
 </script>
 
 <style scoped lang="less">
-    .music{
+    .music {
         position: absolute;
         top: 0;
         right: 0;
