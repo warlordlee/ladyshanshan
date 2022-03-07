@@ -1,5 +1,5 @@
 <template>
-    <div class="main">
+    <div class="main" @click="play">
         <el-carousel direction="vertical" :autoplay="false" indicator-position="none" ref="year"
                      :initial-index="index">
             <el-carousel-item>
@@ -37,7 +37,7 @@
             </div>
         </div>
         <div class="music">
-            <audio loop="loop" autoplay="autoplay" id="bg-music">
+            <audio loop="loop" autoplay="autoplay" id="music-bg">
                 <source src="../assets/music/girl.mp3" type="audio/mpeg">
             </audio>
         </div>
@@ -62,18 +62,13 @@
         },
         methods: {
             handleClick() {
-                this.$refs.year.next()
-            },
-            audioAutoPlay() {
-                let audio = document.getElementById("bg-music");
+                this.$refs.year.next();
+                let audio = document.getElementById("music-bg");
                 audio.play();
-                document.addEventListener(
-                    "WeixinJSBridgeReady",
-                    function () {
-                        audio.play();
-                    },
-                    false
-                );
+            },
+            play(){
+                let audio = document.getElementById("music-bg");
+                audio.play();
             }
         }
     }
